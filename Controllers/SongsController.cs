@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using play_song_ms.Services;
 using play_song_ms.Models;
-using MongoDB.Bson;
-using MongoDB.Driver.GridFS;
-using MongoDB.Driver;
 using System.IO;
 
-namespace play_song_ms.Controllers {
+namespace play_song_ms.Controllers
+{
 
   [Route("api/[controller]")]
   [ApiController]
