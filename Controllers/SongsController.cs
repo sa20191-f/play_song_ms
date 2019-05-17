@@ -32,22 +32,8 @@ namespace play_song_ms.Controllers {
     // GET api/songs/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult> Get(string id) {
-      var client = new MongoClient("mongodb://localhost:27017");
-      var database = client.GetDatabase("trackDB");
-      IGridFSBucket bucket = new GridFSBucket(database, new GridFSBucketOptions {
-        BucketName = "tracks",
-      });
-      ObjectId idSong = ObjectId.Parse(id);
-      Console.WriteLine(idSong);
-      var memory = new MemoryStream();  
-      using (var stream = await bucket.OpenDownloadStreamAsync(idSong)) {
-        await stream.CopyToAsync(memory);
-        await stream.CloseAsync(); 
-      }
-      memory.Position = 0;
-      Console.WriteLine("PASE");
-      Console.WriteLine(memory);
-      return File(memory, "application/octet-stream","alci.mp3");
+      MemoryStream song = await _songService.Get(id);
+      return File(song, "application/octet-stream","alci.mp3");
     }
   }
 }
