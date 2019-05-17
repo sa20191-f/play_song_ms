@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using play_song_ms.Services;
 using play_song_ms.Models;
+using MongoDB.Bson;
+using MongoDB.Driver.GridFS;
+using MongoDB.Driver;
+using System.IO;
 
 namespace play_song_ms.Controllers {
 
@@ -27,8 +31,23 @@ namespace play_song_ms.Controllers {
 
     // GET api/songs/{id}
     [HttpGet("{id}")]
-    public ActionResult<Song> Get(string id) {
-      return _songService.Get(id);
+    public async Task<ActionResult> Get(string id) {
+      var client = new MongoClient("mongodb://localhost:27017");
+      var database = client.GetDatabase("trackDB");
+      IGridFSBucket bucket = new GridFSBucket(database, new GridFSBucketOptions {
+        BucketName = "tracks",
+      });
+      ObjectId idSong = ObjectId.Parse(id);
+      Console.WriteLine(idSong);
+      var memory = new MemoryStream();  
+      using (var stream = await bucket.OpenDownloadStreamAsync(idSong)) {
+        await stream.CopyToAsync(memory);
+        await stream.CloseAsync(); 
+      }
+      memory.Position = 0;
+      Console.WriteLine("PASE");
+      Console.WriteLine(memory);
+      return File(memory, "application/octet-stream","alci.mp3");
     }
   }
 }
