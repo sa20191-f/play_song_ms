@@ -21,13 +21,9 @@ namespace play_song_ms.Controllers
 
     // GET api/songs/
     [HttpGet]
-    /* public ActionResult<List<Song>> Get() {
+    public ActionResult<List<Song>> Get() {
       return _songService.GetAll();
-    } */
-    public ActionResult<string> Get() {
-      return "Soy el cantante";
     }
-
     
     // GET api/songs/{id}
     [HttpGet("{id}")]
