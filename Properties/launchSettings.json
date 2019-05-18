@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:30892",
-      "sslPort": 44374
+      "applicationUrl": "http://localhost:3000",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -21,10 +21,16 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/songs",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "applicationUrl": "https://localhost:3001;http://localhost:3000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "api/songs",
+      "applicationUrl": "https://localhost:3001;http://localhost:3000"
     }
   }
 }
