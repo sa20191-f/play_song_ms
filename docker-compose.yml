@@ -6,3 +6,8 @@ services:
       PORT: '3004'
     ports:
       - "3004:3004"
+  songs_db:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
