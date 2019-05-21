@@ -1,0 +1,51 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for play songs
+  description: ASP.NET Core  + MongoDB
+  license:
+    name: Software Architecture, 2019-I
+host: 192.168.1.68:3004
+basePath: /api
+schemes:
+  - http
+consumes:
+  - audio/mp3
+produces:
+  - application/json
+  - audio/mp3
+paths:
+  /songs:
+    get:
+      summary: Get All Songs
+      operationId: GetAll
+      responses:
+        '200':
+          description: List of Songs stored
+        '500':
+          description: Error getting songs
+  /songs/:
+    get:
+      summary: Get Song by ID
+      parameters:
+        - name: idsong
+          in: path
+          required: true
+          description: ID of song (string guid)
+          type: string
+      responses:
+        '200':
+          description: Song in streaming format
+        '500':
+          description: Error getting song by ID
+definitions:
+  TrackInput:
+    type: object
+    properties:
+      name:
+        type: string
+      track:
+        type: string
+        format: binary  # binary file contents
