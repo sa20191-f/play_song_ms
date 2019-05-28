@@ -11,29 +11,19 @@ using System.Threading.Tasks;
 namespace play_song_ms.Services
 {
   public class SongService {
-    private readonly IMongoCollection<Song> _songs;
-    private readonly IGridFSBucket _songsBucket;
+    private readonly IMongoCollection<Song_Path> _songs_paths;
     public SongService(IConfiguration config) {
       var client = new MongoClient(config.GetConnectionString("TracksConnection"));
-      var database = client.GetDatabase("trackDB");
-      _songs = database.GetCollection<Song>("tracks.files");
-      _songsBucket = new GridFSBucket(database, new GridFSBucketOptions {
-        BucketName = "tracks",
-      });
+      var database = client.GetDatabase("songs");
+      _songs_paths = database.GetCollection<Song_Path>("song_paths");
     }
 
-    public List<Song> GetAll() {
-      return _songs.Find(song => true).ToList();
+    public List<Song_Path> GetAll() {
+      return _songs_paths.Find(song => true).ToList();
     }
-    public async Task<MemoryStream> Get(string id) {
-      ObjectId idSong = ObjectId.Parse(id);
-      var song = new MemoryStream();  
-      using (var stream = await _songsBucket.OpenDownloadStreamAsync(idSong)) {
-        await stream.CopyToAsync(song);
-        await stream.CloseAsync(); 
-      }
-      song.Position = 0;
-      return song;
+    public string Get(string id) {
+      Song_Path song = _songs_paths.Find(song_path => song_path.Id == id).FirstOrDefault();
+      return song.path;
     }
   }
 }

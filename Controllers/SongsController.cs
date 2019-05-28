@@ -21,15 +21,15 @@ namespace play_song_ms.Controllers
 
     // GET api/songs/
     [HttpGet]
-    public ActionResult<List<Song>> Get() {
+    public ActionResult<List<Song_Path>> Get() {
       return _songService.GetAll();
     }
     
     // GET api/songs/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult> Get(string id) {
-      MemoryStream song = await _songService.Get(id);
-      return File(song, "application/octet-stream","alci.mp3");
+    public string Get(string id) {
+      string path = _songService.Get(id);
+      return path;
     }
   }
 }
