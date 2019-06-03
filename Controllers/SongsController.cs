@@ -27,8 +27,8 @@ namespace play_song_ms.Controllers
     
     // GET api/songs/{id}
     [HttpGet("{id}")]
-    public string Get(string id) {
-      string path = _songService.Get(id);
+    public Song_Path Get(string id) {
+      Song_Path path = _songService.Get(id);
       return path;
     }
   }

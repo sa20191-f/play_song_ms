@@ -21,9 +21,9 @@ namespace play_song_ms.Services
     public List<Song_Path> GetAll() {
       return _songs_paths.Find(song => true).ToList();
     }
-    public string Get(string id) {
+    public Song_Path Get(string id) {
       Song_Path song = _songs_paths.Find(song_path => song_path.Id == id).FirstOrDefault();
-      return song.path;
+      return song;
     }
   }
 }
