@@ -13,5 +13,9 @@ namespace play_song_ms.Models
     public string path { get; set; }
     [BsonElement("__v")]
     public int v { get; set; }
+    [BsonElement("song_name")]
+    public string song_name { get; set; }
+    [BsonElement("artist")]
+    public string artist { get; set; }
   }
 }

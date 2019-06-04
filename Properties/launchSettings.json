@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/songs",
-      "applicationUrl": "http://localhost:3004;https://localhost:3005",
+      "applicationUrl": "http://127.0.0.1:3004;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
