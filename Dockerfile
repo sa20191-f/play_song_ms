@@ -15,5 +15,6 @@ RUN dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p cryp
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
+EXPOSE 3004
 ENTRYPOINT ["dotnet", "play_song_ms.dll", "--urls", "http://*:3004;"]
 
